@@ -179,6 +179,7 @@ static int resolve_default_seg(struct insn *insn, struct pt_regs *regs, int off)
 		/* Need insn to verify address size. */
 		if (insn->addr_bytes == 2)
 			return -EINVAL;
+                fallthrough;
 
 	case -EDOM:
 	case offsetof(struct pt_regs, bx):
