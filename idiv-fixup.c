@@ -39,7 +39,11 @@ bool fixup_idiv_exception(struct pt_regs *regs) {
         return false;
     }
 
-    printk("Skipping idiv, ax=0x%lX, dx=0x%lX\n", regs->ax, regs->dx);
+    pr_info("Skipping idiv, ax=0x%lX, dx=0x%lX\n", regs->ax, regs->dx);
+
+    // emulate ISE behaviour
+    regs->ax = 0x80000000;
+    regs->dx = 0;
 
     regs->ip += insn.length;
     return true;
